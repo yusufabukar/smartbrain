@@ -1,14 +1,14 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Courier New', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+	margin: 0;
+	padding: 0;
+	font-family: 'Courier New', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(83deg, #FF5EDF 8%, #84C8DE 100%)
+	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+  	background: linear-gradient(83deg, #FF5EDF 8%, #84C8DE 100%)
 }
 
 button {
-  cursor: pointer
+	cursor: pointer
 }
