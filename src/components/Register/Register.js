@@ -23,16 +23,14 @@ class Register extends React.Component {
     };
 
     onSubmitRegister = () => {
-        fetch('http://localhost:3000/register', {
+        const { name, email, password } = this.state;
+        fetch('https://back-end.com/register', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    name: this.state.name,
-                    email: this.state.email,
-                    password: this.state.password
+                    name,
+                    email,
+                    password
                 })
         })
             .then(response => response.json())
@@ -41,8 +39,7 @@ class Register extends React.Component {
                     this.props.loadUser(user);
                     this.props.onStageChange('main');
                 };
-            })
-            .catch(error => console.log(error));
+            });
     };
     
     render() {
@@ -51,7 +48,7 @@ class Register extends React.Component {
             <article className='br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center'>
                 <main className="pa4 black-80">
                     <div className="measure">
-                        <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+                        <fieldset id='register' className="ba b--transparent ph0 mh0">
                             <legend className="f2 fw6 ph0 mh0">Register For SmartBrain</legend>
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
@@ -93,7 +90,7 @@ class Register extends React.Component {
                             />
                         </div>
                         <div className="lh-copy mt3">
-                            <a onClick={() => onStageChange('logIn')} className="f6 link dim black db pointer">Back to Login</a>
+                            <p onClick={() => onStageChange('logIn')} className="f6 link dim black db pointer">Back to Login</p>
                         </div>
                     </div>
                 </main>

@@ -1,5 +1,3 @@
-// SMARTBRAIN
-
 import React, { Component, Fragment } from 'react';
 import Particles from 'react-particles-js';
 import Navigation from './components/Navigation/Navigation';
@@ -27,7 +25,7 @@ const initialState = {
 	stage: 'logIn',
 	isLoggedIn: false,
 	user: {
-		id: '', // SEE IF CHANGING TO 0 AFFECTS APP
+		id: 0,
 		name: '',
 		email: '',
 		entries: 0
@@ -67,7 +65,7 @@ class App extends Component {
 	};
 
 	detectFaceLocation = (data) => {
-		const faceLocationData = data.outputs[0].data.regions[0].region_info.boundingbox;
+		const faceLocationData = data.outputs[0].data.regions[0].region_info.bounding_box;
 		const image = document.getElementById('inputImage');
 		const width = Number(image.width);
 		const height = Number(image.height);
@@ -87,28 +85,25 @@ class App extends Component {
 	onImageSubmit = () => {
 		this.setState({imageURL: this.state.input});
 
-		fetch('http://localhost:3001/imageurl', {
+		fetch('https://back-end.com/apicall', {
 				method: 'POST',
 				headers: {'Content-Type': 'application/json'},
-				body: JSON.stringify({
-					input: this.state.input // SHOULD WE BE SENDING OVER IMAGEURL
-				})
-		})
+				body: JSON.stringify({input: this.state.input})
+			})
 			.then(response => response.json())
 			.then(response => {
+				// debugger;
 				if (response) {
-					fetch('http://localhost:3001/image', {
+					fetch('https://back-end.com/image', {
 							method: 'PUT',
 							headers: {'Content-Type': 'application/json'},
-							body: JSON.stringify({
-								id: this.state.user.id
-							})
+							body: JSON.stringify({id: this.state.user.id})
 					})
 						.then(response => response.json())
 						.then(count => this.setState(Object.assign(this.state.user, {entries: count})))
 						.catch(error => console.log(error));
 				};
-				this.displayFaceBox(this.calculateFaceLocation(response));
+				this.displayDetectionBox(this.detectFaceLocation(response));
 			})
 			.catch(error => console.log(error));
 	};
@@ -119,7 +114,6 @@ class App extends Component {
 			<div className='App'>
 				<Particles className='particles' params={particlesOptions} />
 				<Navigation isLoggedIn={isLoggedIn} onStageChange={this.onStageChange} />
-				
 				{stage === 'main'
 					?	<Fragment>
 							<Logo />

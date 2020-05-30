@@ -4,26 +4,27 @@ class logIn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            logInEmail: '',
-            logInPassword: ''
+            email: '',
+            password: ''
         };
     };
 
     onEmailChange = (event) => {
-        this.setState({logInEmail: event.target.value});
+        this.setState({email: event.target.value});
     };
 
     onPasswordChange = (event) => {
-        this.setState({logInPassword: event.target.value});
+        this.setState({password: event.target.value});
     };
 
     onSubmitLogIn = () => {
-        fetch('http://localhost:3000/login', {
+        const { email, password } = this.state;
+        fetch('https://back-end.com/login', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    email: this.state.logInEmail,
-                    password: this.state.logInPassword
+                    email,
+                    password
                 })
         })
             .then(response => response.json())
@@ -32,8 +33,7 @@ class logIn extends React.Component {
                     this.props.loadUser(user);
                     this.props.onStageChange('main');
                 };
-            })
-            .catch(error => console.log(error));
+            });
     };
 
     render() {
@@ -57,7 +57,7 @@ class logIn extends React.Component {
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                                 <input
-                                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+                                    className="autoFill b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
                                     type="password"
                                     name="password"
                                     id="password"
@@ -74,7 +74,7 @@ class logIn extends React.Component {
                             />
                         </div>
                         <div className="lh-copy mt3">
-                            <a onClick={() => onStageChange('register')} className="f6 link dim black db pointer">Register</a>
+                            <p onClick={() => onStageChange('register')} className="f6 link dim black db pointer">Register</p>
                         </div>
                     </div>
                 </main>
