@@ -19,7 +19,7 @@ class logIn extends React.Component {
 
     onSubmitLogIn = () => {
         const { email, password } = this.state;
-        fetch('https://back-end.com/login', {
+        fetch('https://floating-gorge-89460.herokuapp.com/login', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
