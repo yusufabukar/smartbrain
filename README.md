@@ -21,7 +21,7 @@ SmartBrain uses AI to automatically detect faces (other objects soon), and has a
   * ```process.env.PORT``` -> any open port
   * ```process.env.API_CLARIFAI``` -> you will need your own API key from Clarifai
   * ```process.env.DATABASE_URL``` -> your own server link
-  * (```knex``` connection settings need to be change if you are using ```localhost``` )
+  * (```knex``` connection settings need to be changed if you are using ```localhost``` )
   
 * Clone this repo and put in your own back end links
 * Create a PostgreSQL database with 2 tables, users and login
