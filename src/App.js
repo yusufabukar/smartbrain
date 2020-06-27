@@ -32,7 +32,7 @@ const initialState = {
 	},
 	input: '',
 	imageURL: '',
-	box: {}
+	boxes: []
 };
 
 class App extends Component {
@@ -64,22 +64,25 @@ class App extends Component {
 		this.setState({input: event.target.value});
 	};
 
-	detectFaceLocation = (data) => {
-		const faceLocationData = data.outputs[0].data.regions[0].region_info.bounding_box;
-		const image = document.getElementById('inputImage');
-		const width = Number(image.width);
-		const height = Number(image.height);
+	detectFaceLocations = (data) => {
+		return data.outputs[0].data.regions.map(face => {
+			const faceLocationData = face.region_info.bounding_box;
+			
+			const image = document.getElementById('inputImage');
+			const width = Number(image.width);
+			const height = Number(image.height);
 
-		return {
-			topRow: faceLocationData.top_row * height,
-			rightColumn: width - (faceLocationData.right_col * width),
-			bottomRow: height - (faceLocationData.bottom_row * height),
-			leftColumn: faceLocationData.left_col * width
-		};
+			return {
+				topRow: faceLocationData.top_row * height,
+				rightColumn: width - (faceLocationData.right_col * width),
+				bottomRow: height - (faceLocationData.bottom_row * height),
+				leftColumn: faceLocationData.left_col * width
+			};
+		});
 	};
 
-	displayDetectionBox = (box) => {
-		this.setState({ box });
+	displayDetectionBoxes = (boxes) => {
+		this.setState({ boxes });
 	};
 
 	onImageSubmit = () => {
@@ -103,13 +106,13 @@ class App extends Component {
 						.then(count => this.setState(Object.assign(this.state.user, {entries: count})))
 						.catch(error => console.log(error));
 				};
-				this.displayDetectionBox(this.detectFaceLocation(response));
+				this.displayDetectionBoxes(this.detectFaceLocations(response));
 			})
 			.catch(error => console.log(error));
 	};
 
 	render() {
-		const { stage, isLoggedIn, user, imageURL, box } = this.state;
+		const { stage, isLoggedIn, user, imageURL, boxes } = this.state;
 		return (
 			<div className='App'>
 				<Particles className='particles' params={particlesOptions} />
@@ -119,7 +122,7 @@ class App extends Component {
 							<Logo />
 							<Rank name={user.name} entries={user.entries} />
 							<ImageLinkForm onInputChange={this.onInputChange} onImageSubmit={this.onImageSubmit} />
-							<FaceRecognition imageURL={imageURL} box={box} />
+							<FaceRecognition imageURL={imageURL} boxes={boxes} />
 						</Fragment>
 					: 	(stage === 'logIn'
 							? <LogIn loadUser={this.loadUser} onStageChange={this.onStageChange} />
