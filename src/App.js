@@ -88,7 +88,7 @@ class App extends Component {
 	onImageSubmit = () => {
 		this.setState({imageURL: this.state.input});
 
-		fetch('https://floating-gorge-89460.herokuapp.com/apicall', {
+		fetch('https://smartbraiin-api.herokuapp.com/apicall', {
 				method: 'POST',
 				headers: {'Content-Type': 'application/json'},
 				body: JSON.stringify({input: this.state.input})
@@ -97,7 +97,7 @@ class App extends Component {
 			.then(response => {
 				// debugger;
 				if (response) {
-					fetch('https://floating-gorge-89460.herokuapp.com/image', {
+					fetch('https://smartbraiin-api.herokuapp.com/image', {
 							method: 'PUT',
 							headers: {'Content-Type': 'application/json'},
 							body: JSON.stringify({id: this.state.user.id})
