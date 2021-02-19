@@ -1,28 +1,14 @@
 # SmartBrain
 
-SmartBrain uses AI to automatically detect faces (other objects soon), and has a secure back-end with an encrypted SQL database for login details. Currently live; check it out ^ and have a go. Check out the back-end source code on my <a href="https://github.com/yusufabukar/smartbrain-api">SmartBrain-API</a> repository.
+* Automatically detect multiple faces with SmartBrain's artificial intelligence.
+* Log in securely and see your entry count.
+* Backend: <a href='https://github.com/yusufabukar/smartbrain-api' target='_blank'>SmartBrain API</a>.
 
-# Tech Stack
-* **Front End**
-  * HTML5
-  * CSS3
-  * JavaScript
-  * React
+## Stack
 
-* **Back End**
-  * Node
-  * Express
-
-* **Database**
-  * PostgreSQL
-  
-# Cloning this project
-* Clone the API repo and edit the ```process.env``` environment variables to your own
-  * ```process.env.PORT``` -> any open port
-  * ```process.env.API_CLARIFAI``` -> you will need your own API key from Clarifai
-  * ```process.env.DATABASE_URL``` -> your own server link
-  * (```knex``` connection settings need to be changed if you are using ```localhost``` )
-  
-* Clone this repo and put in your own back end links
-* Create a PostgreSQL database with 2 tables, users and login
-* Check the ```package.json``` for dependencies and versions you need
+![HTML](https://img.shields.io/badge/-HTML-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/-CSS-1572B6?style=flat-square&logo=css3)
+![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![React](https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=react&logoColor=black)
+![Redux](https://img.shields.io/badge/-Redux-764ABC?style=flat-square&logo=redux)
+![Heroku](https://img.shields.io/badge/-Heroku-430098?style=flat-square&logo=heroku)
